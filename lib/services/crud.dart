@@ -14,6 +14,6 @@ class CrudMethods {
   }
 
   getData() async {
-    return await FirebaseFirestore.instance.collection("blogs").snapshots();
+    return await FirebaseFirestore.instance.collection("blogs").orderBy("authorName").snapshots();
   }
 }
