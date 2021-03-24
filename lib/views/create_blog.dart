@@ -19,7 +19,9 @@ class _CreateBlogState extends State<CreateBlog> {
   CrudMethods crudMethods = new CrudMethods();
 
   Future getImage() async {
-    final pickedFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    final _picker = ImagePicker();
+
+    final pickedFile = await _picker.getImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedFile != null) {
