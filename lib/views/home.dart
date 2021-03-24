@@ -3,6 +3,7 @@ import 'package:flutter_blog/services/crud.dart';
 import 'package:flutter_blog/views/create_blog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -30,13 +31,12 @@ class _HomePageState extends State<HomePage> {
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return BlogsTile(
-                              authorName: snapshot.data.docs[index]
-                                  .data()['authorName'],
+                              authorName:
+                                  snapshot.data.docs[index].data()['authorName'],
                               title: snapshot.data.docs[index].data()['title'],
                               description:
                                   snapshot.data.docs[index].data()['desc'],
-                              imgUrl:
-                                  snapshot.data.docs[index].data()['imgUrl'],
+                              imgUrl: snapshot.data.docs[index].data()['imgUrl'],
                             );
                           });
                   },
@@ -103,10 +103,10 @@ class _HomePageState extends State<HomePage> {
 class BlogsTile extends StatelessWidget {
   String imgUrl, title, description, authorName;
   BlogsTile(
-      {@required this.imgUrl,
+      {@required this.authorName,
       @required this.title,
       @required this.description,
-      @required this.authorName});
+      @required this.imgUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -117,11 +117,12 @@ class BlogsTile extends StatelessWidget {
         children: <Widget>[
           ClipRRect(
             borderRadius: BorderRadius.circular(6),
-            child: CachedNetworkImage(
+            child: imgUrl != null 
+            ? CachedNetworkImage(
               imageUrl: imgUrl,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
-            ),
+            ) : Container(),
           ),
           Container(
             height: 170,
